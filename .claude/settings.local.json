@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -name \".gitignore\" -exec cat {} ;)",
+      "Bash(python -c \":*)"
+    ]
+  }
+}

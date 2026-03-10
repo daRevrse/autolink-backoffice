@@ -46,15 +46,19 @@ select:focus-visible {
   outline-offset: 1px;
 }
 
-/* Smooth transitions */
-button, a {
-  transition: all 0.15s ease;
-}
-button:hover {
-  opacity: 0.9;
+/* Global Transitions */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Table hover */
-tr {
-  transition: background 0.1s ease;
+button, a {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }

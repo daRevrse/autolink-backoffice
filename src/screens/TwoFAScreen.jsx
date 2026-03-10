@@ -1,13 +1,23 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Shield, CheckCircle, Key } from "lucide-react";
 import { theme as C } from "../theme";
 import { Btn } from "../components/ui";
 
-export default function TwoFAScreen({ onVerify }) {
+export default function TwoFAScreen() {
+  const navigate = useNavigate();
+
+  const handleVerify = (e) => {
+    e?.preventDefault();
+    // Simulation vérification -> redirection vers Dashboard
+    navigate("/");
+  };
+
   return (
     <div style={{
       display: "flex", alignItems: "center", justifyContent: "center",
       minHeight: "100%",
-      background: `linear-gradient(135deg, ${C.darkSidebar} 0%, #1E293B 100%)`,
+      background: "transparent", // Le gradient est dans AuthLayout
     }}>
       <div style={{
         background: C.white, borderRadius: 16, width: 400,
@@ -35,7 +45,7 @@ export default function TwoFAScreen({ onVerify }) {
             }} />
           ))}
         </div>
-        <Btn primary icon={CheckCircle} onClick={onVerify} style={{
+        <Btn primary icon={CheckCircle} onClick={handleVerify} style={{
           width: "100%", padding: "11px", justifyContent: "center",
           fontSize: 14, borderRadius: 8,
         }}>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Plus,
   Download,
@@ -154,7 +155,8 @@ export function UsersScreen() {
 }
 
 // ─── DEMANDES ────────────────────────────────────────────
-export function DemandesScreen({ onSelect }) {
+export function DemandesScreen() {
+  const navigate = useNavigate();
   const [tab, setTab] = useState("Toutes");
   return (
     <div>
@@ -189,7 +191,7 @@ export function DemandesScreen({ onSelect }) {
           "Priorité",
           "Action",
         ]}
-        onRowClick={() => onSelect?.("detail-demande")}
+        onRowClick={(row) => navigate(`/demandes/${row[0].props.children}`)}
         rows={[
           [
             <b>DM-089</b>,
@@ -268,7 +270,9 @@ export function DemandesScreen({ onSelect }) {
 }
 
 // ─── DETAIL DEMANDE ──────────────────────────────────────
-export function DetailDemandeScreen({ onBack }) {
+export function DetailDemandeScreen() {
+  const navigate = useNavigate();
+  const { id } = useParams();
   return (
     <div>
       <div
@@ -279,7 +283,7 @@ export function DetailDemandeScreen({ onBack }) {
           marginBottom: 6,
           cursor: "pointer",
         }}
-        onClick={onBack}
+        onClick={() => navigate("/demandes")}
       >
         <ChevronLeft size={16} color={C.primary} />
         <span style={{ fontSize: 12, color: C.primary }}>
@@ -295,7 +299,7 @@ export function DetailDemandeScreen({ onBack }) {
           flexWrap: "wrap",
         }}
       >
-        <span style={{ fontSize: 22, fontWeight: 700 }}>Demande #DM-089</span>
+        <span style={{ fontSize: 22, fontWeight: 700 }}>Demande #{id || "DM-089"}</span>
         <Badge color={C.danger} icon={Zap}>
           Dépannage
         </Badge>
@@ -437,7 +441,8 @@ export function DetailDemandeScreen({ onBack }) {
 }
 
 // ─── CLIENTS ─────────────────────────────────────────────
-export function ClientsScreen({ onSelect }) {
+export function ClientsScreen() {
+  const navigate = useNavigate();
   return (
     <div>
       <PageHeader breadcrumb="Gestion" title="Base de données clients">
@@ -464,7 +469,7 @@ export function ClientsScreen({ onSelect }) {
           "Dernier service",
           "Actions",
         ]}
-        onRowClick={() => onSelect?.("fiche-client")}
+        onRowClick={() => navigate("/clients/1")}
         rows={[
           [
             <b>Jean DUPONT</b>,
@@ -533,7 +538,9 @@ export function ClientsScreen({ onSelect }) {
 }
 
 // ─── FICHE CLIENT ────────────────────────────────────────
-export function FicheClientScreen({ onBack }) {
+export function FicheClientScreen() {
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [tab, setTab] = useState("Informations");
   return (
     <div>
@@ -545,7 +552,7 @@ export function FicheClientScreen({ onBack }) {
           marginBottom: 6,
           cursor: "pointer",
         }}
-        onClick={onBack}
+        onClick={() => navigate("/clients")}
       >
         <ChevronLeft size={16} color={C.primary} />
         <span style={{ fontSize: 12, color: C.primary }}>

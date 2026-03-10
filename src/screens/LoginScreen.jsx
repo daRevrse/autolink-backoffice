@@ -1,13 +1,23 @@
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Car, Lock } from "lucide-react";
 import { theme as C } from "../theme";
 import { Btn, FormField } from "../components/ui";
 
-export default function LoginScreen({ onLogin }) {
+export default function LoginScreen() {
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e?.preventDefault();
+    // Simulation login -> redirection vers verify
+    navigate("/verify");
+  };
+
   return (
     <div style={{
       display: "flex", alignItems: "center", justifyContent: "center",
       minHeight: "100%",
-      background: `linear-gradient(135deg, ${C.darkSidebar} 0%, #1E293B 100%)`,
+      background: "transparent", // Le gradient est dans AuthLayout
     }}>
       <div style={{
         background: C.white, borderRadius: 16, width: 380,
@@ -32,7 +42,7 @@ export default function LoginScreen({ onLogin }) {
               Mot de passe oublié ?
             </a>
           </div>
-          <Btn primary icon={Lock} onClick={onLogin} style={{
+          <Btn primary icon={Lock} onClick={handleLogin} style={{
             width: "100%", padding: "11px", justifyContent: "center",
             fontSize: 14, borderRadius: 8,
           }}>
